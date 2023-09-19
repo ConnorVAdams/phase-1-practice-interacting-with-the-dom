@@ -3,7 +3,8 @@
 const counter = document.querySelector('#counter');
 const minus = document.querySelector('#minus');
 const plus = document.querySelector('#plus');
-const pause = document.querySelector('#pause')
+const heart = document.querySelector('#heart');
+const pause = document.querySelector('#pause');
 
 //Variables for global malleable values
 let currentCount = parseInt(counter.textContent);
@@ -14,6 +15,14 @@ const likedNumbers = [];
 
 // ! Start timer and set intervals
 //Increase the value of currentCount by 1 every second and update the DOM accordingly
+setInterval(() => { 
+    if (paused === false) {
+        counter.textContent = currentCount;
+        currentCount = currentCount + 1;
+    } else {
+        counter.textContent = currentCount;
+    }
+}, 1000);
 
 // ! Define event handlers
 // ! Define handleMinus
@@ -39,19 +48,18 @@ const handlePlus = () => {
 const handlePause = () => {
     //If counter is currently paused
     if (paused === false) {
+        //Change paused state
+        paused = true;
         //Stop incrementing current count
         clearInterval(1);
-        //Change state of paused global variable
-        paused = true;
+
     //If counter is currently unpaused
     } else {
         //TODO Should I define this anonymous function?
+        //Change paused state
         paused = false;
-        setInterval(() => { 
-            counter.textContent = currentCount;
-            currentCount = currentCount + 1;
-        }, 1000);
     }
+    console.log(`paused? ${paused}`)
 };
 
 // ! Define handleLike
@@ -70,3 +78,4 @@ const handlePause = () => {
 // ! Attach event handlers to clickable elements
 minus.addEventListener('click', handleMinus);
 plus.addEventListener('click', handlePlus);
+pause.addEventListener('click', handlePause);
