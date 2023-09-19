@@ -14,7 +14,7 @@ const likedNumbers = [];
 
 // ! Start timer and set intervals
 //Increase the value of currentCount by 1 every second and update the DOM accordingly
-const intervalId = setInterval(() => { 
+setInterval(() => { 
     currentCount = currentCount + 1;
     counter.textContent = currentCount;
 }, 1000);
@@ -41,15 +41,15 @@ const handlePlus = () => {
 // ! Define handlePause
 //Disable the functionality of the minus, plus, and heart and pause counter
 const handlePause = () => {
+    //If counter is currently paused
     if (paused === false) {
-        paused = true;
+        //Stop incrementing current count
         clearInterval(1);
+        //Change state of paused global variable
+        paused = true;
+    //If counter is currently unpaused
     } else {
         //TODO Should I define this anonymous function?
-        setInterval(() => { 
-            currentCount = currentCount + 1;
-            counter.textContent = currentCount;
-        }, 1000);
         paused = false;
     }
 };
