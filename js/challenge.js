@@ -19,17 +19,7 @@ const intervalId = setInterval(() => {
     counter.textContent = currentCount;
 }, 1000);
 
-// ! Define event handlers to clickable elements
-// ! Define handleLike
-//Pass in currentCount
-//If an li with data-num = currentCount already exists in <ul.class>
-    //Update that <li span> by + 1
-//Else 
-    //Create an <li> associated with the liked number in the <ul.likes>
-    //Pass the value of currentCount to the data-num attribute in the newly created <li>
-    //Target the <li span> and update it to reflect an addition of one like
-    //Append new li to the DOM
-
+// ! Define event handlers
 // ! Define handleMinus
 //Pass in currentCount
 const handleMinus = () => {
@@ -64,6 +54,19 @@ const handlePause = () => {
     }
 };
 
+// ! Define handleLike
+//Pass in currentCount
+//If an li with data-num = currentCount already exists in <ul.class>
+    //Update that <li span> by + 1
+//Else 
+    //Create an <li> associated with the liked number in the <ul.likes>
+    //Pass the value of currentCount to the data-num attribute in the newly created <li>
+    //Target the <li span> and update it to reflect an addition of one like
+    //Append new li to the DOM
+//
+
 // ! Define handleSubmitComment
 
-// ! Attach event handlers
+// ! Attach event handlers to clickable elements
+minus.addEventListener('click', handleMinus);
+plus.addEventListener('click', handlePlus);
