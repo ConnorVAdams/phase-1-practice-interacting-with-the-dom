@@ -14,10 +14,6 @@ const likedNumbers = [];
 
 // ! Start timer and set intervals
 //Increase the value of currentCount by 1 every second and update the DOM accordingly
-setInterval(() => { 
-    currentCount = currentCount + 1;
-    counter.textContent = currentCount;
-}, 1000);
 
 // ! Define event handlers
 // ! Define handleMinus
@@ -51,6 +47,10 @@ const handlePause = () => {
     } else {
         //TODO Should I define this anonymous function?
         paused = false;
+        setInterval(() => { 
+            counter.textContent = currentCount;
+            currentCount = currentCount + 1;
+        }, 1000);
     }
 };
 
