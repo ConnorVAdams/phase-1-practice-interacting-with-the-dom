@@ -28,9 +28,22 @@ setInterval(() => {
     //Append new li to the DOM
 
 // ! Define handleMinus
-//Pass in 
+//Pass in currentCount
+const handleMinus = () => {
+    //Decrease currentCount by 1
+    currentCount = currentCount - 1;
+    //Update the DOM
+    counter.textContent = currentCount;
+};
 
 // ! Define handlePlus
+//Pass in currentCount
+const handlePlus = () => {
+    //Increase currentCount by 1
+    currentCount = currentCount + 1;
+    //Update the DOM
+    counter.textContent = currentCount;
+};
 
 // ! Define handlePause
 //Disable the functionality of the minus, plus, and heart
