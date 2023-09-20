@@ -48,11 +48,15 @@ const handlePlus = () => {
 
 // ! Define handlePause
 //Disable the functionality of the minus, plus, and heart and pause counter
-//Stop current count incrementing
+//Stop current count incrementing and toggle resume and pause
 const handlePause = () => {
     if (!paused) {
         paused = true;
-    } else paused = false;
+        pause.textContent = 'resume'
+    } else {
+        paused = false;
+        pause.textContent = 'pause'
+    };
     //Disable other buttons
     const buttons = [heart, plus, minus].forEach(button => button.toggleAttribute('disabled'));
 };
