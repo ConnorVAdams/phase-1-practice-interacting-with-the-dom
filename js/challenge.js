@@ -1,10 +1,15 @@
 // ! Assign variables to elements you might need to target
 //Variables for clickable DOM elements
 const counter = document.querySelector('#counter');
+
 const minus = document.querySelector('#minus');
 const plus = document.querySelector('#plus');
 const heart = document.querySelector('#heart');
 const pause = document.querySelector('#pause');
+
+const submitForm = document.querySelector('form');
+const submitBtn = document.querySelector('#submit');
+const commentsDiv = document.querySelector('#list');
 
 //Variables for global malleable values
 let currentCount = 0
@@ -74,8 +79,19 @@ const handlePause = () => {
 
 // ! Define handleSubmitComment
 //Display comment in Comments <div>
+const handleSubmit = (e) => {
+    //Prevent form refresh
+    e.preventDefault();
+    //Capture form data
+    const userInput = submitForm.querySelector('#comment-input').value;
+    const newP = document.createElement('p');
+    newP.textContent = userInput
+    commentsDiv.appendChild(newP)
+    submitForm.reset();
+}
 
 // ! Attach event handlers to clickable elements
 minus.addEventListener('click', handleMinus);
 plus.addEventListener('click', handlePlus);
 pause.addEventListener('click', handlePause);
+submitBtn.addEventListener('click', handleSubmit)
