@@ -18,7 +18,7 @@ let paused = false;
 const likedNumbers = [];
 // const likesForCurrentCount = 
 
-// ! Start timer and set intervals
+// ! Start counter and set intervals
 //Increase the value of currentCount by 1 every second and update the DOM accordingly
 var setInterval = setInterval(() => { 
     if (!paused) {
@@ -48,19 +48,14 @@ const handlePlus = () => {
 
 // ! Define handlePause
 //Disable the functionality of the minus, plus, and heart and pause counter
-//Stop current count
+//Stop current count incrementing
 const handlePause = () => {
     if (!paused) {
         paused = true;
     } else paused = false;
-}
-//Stop counter from changing
-//Disable other buttons
-
-// ! Define handleUnpause
-//Enable buttons and resume counter
-//Resume current count
-//Resume counter changing
+    //Disable other buttons
+    const buttons = [heart, plus, minus].forEach(button => button.toggleAttribute('disabled'));
+};
 
 // ! Define handleLike
 //Pass in currentCount
@@ -79,4 +74,4 @@ const handlePause = () => {
 // ! Attach event handlers to clickable elements
 minus.addEventListener('click', handleMinus);
 plus.addEventListener('click', handlePlus);
-// pause.addEventListener('click', handlePause);
+pause.addEventListener('click', handlePause);
