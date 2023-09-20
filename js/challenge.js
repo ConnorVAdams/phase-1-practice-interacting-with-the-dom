@@ -91,13 +91,17 @@ const addNewLikedNum = () => {
 //Pass in currentCount
 const handleLike = () => {
     if (!checkInLikedNums()) {
-        debugger
         //Add new numObj if it if that number hasn't been liked yet
-        const likedNumberObj = addNewLikedNum()
-    }
-
-    //Update likes value of numObj
-    likedNumber.likes = likedNumber.likes + 1;
+        addNewLikedNum()
+    };
+    //Capture the numObj associated with counter's current display
+    let likedNum;
+    likedNums.forEach(element => {
+        if (element['data-num'] === currentCount) {
+            likedNum = element;
+        };
+    })
+    likedNum.likes = likedNum.likes + 1;
     // Change number of likes in the DOM
     //Target the <li> with data-num === 
     //Grab the most recently pushed object of likedNums
