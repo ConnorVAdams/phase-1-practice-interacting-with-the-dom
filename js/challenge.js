@@ -7,19 +7,22 @@ const heart = document.querySelector('#heart');
 const pause = document.querySelector('#pause');
 
 //Variables for global malleable values
-let currentCount = parseInt(counter.textContent);
+let currentCount = 0
 let paused = false;
 
+//TODO Counter and currentCount should both
+//Increment when !paused
+//Stop incrementing when paused === true
+
+// ! Store liked numbers and their number of likes locally/globally
 const likedNumbers = [];
 // const likesForCurrentCount = 
 
 // ! Start timer and set intervals
 //Increase the value of currentCount by 1 every second and update the DOM accordingly
-setInterval(() => { 
-    if (paused === false) {
-        counter.textContent = currentCount;
+var setInterval = setInterval(() => { 
+    if (!paused) {
         currentCount = currentCount + 1;
-    } else {
         counter.textContent = currentCount;
     }
 }, 1000);
@@ -45,22 +48,19 @@ const handlePlus = () => {
 
 // ! Define handlePause
 //Disable the functionality of the minus, plus, and heart and pause counter
+//Stop current count
 const handlePause = () => {
-    //If counter is currently paused
-    if (paused === false) {
-        //Change paused state
+    if (!paused) {
         paused = true;
-        //Stop incrementing current count
-        clearInterval(1);
+    } else paused = false;
+}
+//Stop counter from changing
+//Disable other buttons
 
-    //If counter is currently unpaused
-    } else {
-        //TODO Should I define this anonymous function?
-        //Change paused state
-        paused = false;
-    }
-    console.log(`paused? ${paused}`)
-};
+// ! Define handleUnpause
+//Enable buttons and resume counter
+//Resume current count
+//Resume counter changing
 
 // ! Define handleLike
 //Pass in currentCount
@@ -74,8 +74,9 @@ const handlePause = () => {
 //
 
 // ! Define handleSubmitComment
+//Display comment in Comments <div>
 
 // ! Attach event handlers to clickable elements
 minus.addEventListener('click', handleMinus);
 plus.addEventListener('click', handlePlus);
-pause.addEventListener('click', handlePause);
+// pause.addEventListener('click', handlePause);
