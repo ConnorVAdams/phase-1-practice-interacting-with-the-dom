@@ -23,14 +23,6 @@ let paused = false;
 // ! Store liked numbers and their number of likes locally/globally
 //{Liked numbers}
 const likedNums = [
-    {  
-        'data-num': 3,
-        likes: 7,
-    },
-    {
-        'data-num': 4,
-        likes: 3,
-    },
     ];
 
 // ! Start counter and set intervals
@@ -73,17 +65,21 @@ const handlePause = () => {
         pause.textContent = 'pause'
     };
     //Disable other buttons
-    // const buttons = [heart, plus, minus].forEach(button => button.toggleAttribute('disabled'));
+    // ! const buttons = [heart, plus, minus].forEach(button => button.toggleAttribute('disabled'));
 };
 
 const addNewLikedNum = () => {
     //Add new numObj to [likedNums]
-    const newNumObj = {'data-num': currentCount, likes: 1}
+    const newNumObj = {id: currentCount, likes: 1}
     likedNums.push(newNumObj);
     //Add new <li> to <ul.list>
     const newlyLikedNum = document.createElement('li');
+    //Append it to <ul.likes>
+    newlyLikedNum.id = newNumObj.id
     likesUl.appendChild(newlyLikedNum);
-    newlyLikedNum.innerHTML = `${newNumObj['data-num']} has been liked <span>${newNumObj.likes}</span> times`;
+    //Change the text content to reflect the liked number
+    newlyLikedNum.innerHTML = `${newNumObj.id} has been liked <span>${newNumObj.likes - 1}</span> times`;
+    //Return the new object for use in handleLike()
     return newNumObj;
 };
 
@@ -97,28 +93,37 @@ const handleLike = () => {
     //Capture the numObj associated with counter's current display
     let likedNum;
     likedNums.forEach(element => {
-        if (element['data-num'] === currentCount) {
+        if (element.id === currentCount) {
             likedNum = element;
         };
     })
-    likedNum.likes = likedNum.likes + 1;
-    // Change number of likes in the DOM
-    //Target the <li> with data-num === 
-    //Grab the most recently pushed object of likedNums
-
-    // likedNums[likedNums.length - 1].likes ++ 
+    updateLikes(likedNum);
 };
 
 // ! Define checkInLikedNums
 //Checks [likedNums] to see if liked number already exists as an element
 const checkInLikedNums = () => {
     for (element of likedNums) {
-        if (parseInt(element['data-num']) === currentCount) {
+        if (parseInt(element.id) === currentCount) {
             return element;
         }
     }
     return false;
 };
+
+// ! Define updateLikes
+const updateLikes = (likedNum) => {
+    //Update number of likes
+    likedNum.likes = likedNum.likes + 1;
+    // Change number of likes in the DOM
+    //Target the <li> with data-num === likedNum.id
+    // const targetedLi = document.getElementById(`${likedNum.id}`)
+    // //Change number in span to reflect like
+    // targetedLi.innerHTML = `${likedNum.id} has been liked <span>${updatedLikes - 1}</span> times`;
+
+    // parseInt(targetedSpan.textContent);
+    // targetedSpan.textContent = parseInt(targetedSpan.textContent) + 1;
+}
 
 // ! Define handleSubmitComment
 //Display comment in Comments <div>
@@ -131,11 +136,11 @@ const handleSubmit = (e) => {
     newP.textContent = userInput
     commentsDiv.appendChild(newP)
     submitForm.reset();
-}
+};
 
 // ! Attach event handlers to clickable elements
 minus.addEventListener('click', handleMinus);
 plus.addEventListener('click', handlePlus);
 heart.addEventListener('click', handleLike);
 pause.addEventListener('click', handlePause);
-submitBtn.addEventListener('click', handleSubmit)
+submitBtn.addEventListener('click', handleSubmit);
