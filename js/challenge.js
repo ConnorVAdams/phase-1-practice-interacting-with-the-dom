@@ -65,20 +65,18 @@ const handlePause = () => {
         pause.textContent = 'pause'
     };
     //Disable other buttons
-    // ! const buttons = [heart, plus, minus].forEach(button => button.toggleAttribute('disabled'));
+    const buttons = [heart, plus, minus].forEach(button => button.toggleAttribute('disabled'));
 };
 
 const addNewLikedNum = () => {
     //Add new numObj to [likedNums]
-    const newNumObj = {id: currentCount, likes: 1}
+    const newNumObj = {id: currentCount.toString(), likes: 0}
     likedNums.push(newNumObj);
     //Add new <li> to <ul.list>
     const newlyLikedNum = document.createElement('li');
     //Append it to <ul.likes>
     newlyLikedNum.id = newNumObj.id
     likesUl.appendChild(newlyLikedNum);
-    //Change the text content to reflect the liked number
-    newlyLikedNum.innerHTML = `${newNumObj.id} has been liked <span>${newNumObj.likes - 1}</span> times`;
     //Return the new object for use in handleLike()
     return newNumObj;
 };
@@ -93,11 +91,12 @@ const handleLike = () => {
     //Capture the numObj associated with counter's current display
     let likedNum;
     likedNums.forEach(element => {
-        if (element.id === currentCount) {
+        if (element.id === currentCount.toString()) {
             likedNum = element;
         };
-    })
+    });
     updateLikes(likedNum);
+    updateDOM(likedNum);
 };
 
 // ! Define checkInLikedNums
@@ -115,14 +114,17 @@ const checkInLikedNums = () => {
 const updateLikes = (likedNum) => {
     //Update number of likes
     likedNum.likes = likedNum.likes + 1;
-    // Change number of likes in the DOM
-    //Target the <li> with data-num === likedNum.id
-    // const targetedLi = document.getElementById(`${likedNum.id}`)
-    // //Change number in span to reflect like
-    // targetedLi.innerHTML = `${likedNum.id} has been liked <span>${updatedLikes - 1}</span> times`;
+    return likedNum;
+};
 
-    // parseInt(targetedSpan.textContent);
-    // targetedSpan.textContent = parseInt(targetedSpan.textContent) + 1;
+// ! Define updateDOM
+//Pass in likedNum ID and current likes
+const updateDOM = (likedNum) => {
+    //Find <li> containing targetedNum
+    let targetedLiId = likedNum.id;
+    let targetedLi = document.querySelector(`[id='${targetedLiId}']`)
+    //Increase number in that <li span> by 1
+    targetedLi.innerHTML = `${likedNum.id} has been liked <span>${likedNum.likes}</span> times`;
 }
 
 // ! Define handleSubmitComment
