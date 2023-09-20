@@ -73,36 +73,70 @@ const handlePause = () => {
         pause.textContent = 'pause'
     };
     //Disable other buttons
-    const buttons = [heart, plus, minus].forEach(button => button.toggleAttribute('disabled'));
+    // const buttons = [heart, plus, minus].forEach(button => button.toggleAttribute('disabled'));
 };
 
 // ! Define handleLike
 //Pass in currentCount
 const handleLike = () => {
-    //Determine if currentCount exists in likedNums array
-    likedNums.forEach(element => {
-        if (element['data-num'] !== currentCount) {
-            console.log('not same')
-            //Add new number Object to [likedNums]
-            const newNumObj = {'data-num': currentCount, likes: 1}
-            likedNums.push(newNumObj);
-            //Create an <li> associated with the liked number in the <ul.likes>
-            const newLikedNum = document.createElement('li');
-            //Target the <li> and update it to reflect initial like
-            newLikedNum.innerHTML = `${currentCount} has been liked <span>1</span> time`;
-            //Pass the value of currentCount to the data-num attribute in the newly created <li>
-            newLikedNum.setAttribute('data-num', `${currentCount}`);
-            //Initialize like count
-            newLikedNum.likes = 1;
-            //Append new li to the DOM
-            likesUl.appendChild(newLikedNum);
-        } else {
-            // let targetedSpan = document.querySelector(`.likesUl li[data-num='${currentCount}'] span`)
-            console.log('same')
-            // targetedSpan.textContent = parseInt(targetedSpan.textContent) + 1
-        };
-    })
+    //Check for already liked number
+    //If already liked
+    debugger
+    // if (checkInLikedNums()) {
+    //     //Update likes value of numObj
+    //     const alreadyLikedNumber = checkInLikedNums();
+    //     console.log(alreadyLikedNumber)
+
+        //Change number of likes in the DOM
+    // } else {
+    //     //Add new numObj to [likedNums]
+    //     // const newNumObj = {'data-num': currentCount, likes: 1}
+    //     //     likedNums.push(newNumObj);
+    //     //Add new <li> to <ul.list>
+    // }
+    
+    
+}
+
+// ! Define checkInLikedNums
+//Checks [likedNums] to see if liked number already exists as an element
+const checkInLikedNums = () => {
+    for (element of likedNums) {
+        if (parseInt(element['data-num']) === currentCount) {
+            return element;
+        }
+    }
+    return false;
 };
+
+
+
+
+//     //Determine if currentCount exists in likedNums array
+//     likedNums.forEach(element => {
+//         //Goes through EACH element of the array to compare with currentCount
+//         if (element['data-num'] !== currentCount) {
+//             //Add new number Object to [likedNums]
+//             const newNumObj = {'data-num': currentCount, likes: 1}
+//             likedNums.push(newNumObj);
+//             //Create an <li> associated with the liked number in the <ul.likes>
+//             const newLikedNum = document.createElement('li');
+//             //Target the <li> and update it to reflect initial like
+//             newLikedNum.innerHTML = `${currentCount} has been liked <span>1</span> time`;
+//             //Pass the value of currentCount to the data-num attribute in the newly created <li>
+//             debugger
+//             newLikedNum.setAttribute('data-num', `${currentCount}`);
+//             //Initialize like count
+//             newLikedNum.likes = 1;
+//             //Append new li to the DOM
+            
+//         } else {
+//             // let targetedSpan = document.querySelector(`.likesUl li[data-num='${currentCount}'] span`)
+//             console.log('same')
+//             // targetedSpan.textContent = parseInt(targetedSpan.textContent) + 1
+//         };
+//     })
+// };
 
     //Pass in currentCount
     //Search likedNums Object for object with data-num === currentCount
