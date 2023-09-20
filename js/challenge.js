@@ -80,20 +80,19 @@ const handlePause = () => {
 //Pass in currentCount
 const handleLike = () => {
     //Check for already liked number
-    //If already liked
-    debugger
-    // if (checkInLikedNums()) {
-    //     //Update likes value of numObj
-    //     const alreadyLikedNumber = checkInLikedNums();
-    //     console.log(alreadyLikedNumber)
-
-        //Change number of likes in the DOM
-    // } else {
-    //     //Add new numObj to [likedNums]
-    //     // const newNumObj = {'data-num': currentCount, likes: 1}
-    //     //     likedNums.push(newNumObj);
-    //     //Add new <li> to <ul.list>
-    // }
+    if (checkInLikedNums()) {
+        //Update likes value of numObj
+        const alreadyLikedNumber = checkInLikedNums();
+        alreadyLikedNumber.likes = alreadyLikedNumber.likes + 1;
+        // Change number of likes in the DOM
+        
+    } else {
+        //Add new numObj to [likedNums]
+        const newNumObj = {'data-num': currentCount, likes: 1}
+            likedNums.push(newNumObj);
+        debugger
+        //Add new <li> to <ul.list>
+    }
     
     
 }
